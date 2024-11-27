@@ -1,0 +1,2 @@
+_target_: watchmal.engine.loss.angular.CosineLoss
+swap_yz: False

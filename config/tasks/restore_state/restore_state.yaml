@@ -1,1 +1,1 @@
-weight_file: '/path/to/outputs/ClassifierBEST.pth'
+weight_file: '/home/yikai/t2k_ml/WatChMaL/outputs/2024-11-10/13-18-50/outputs/RegressionEngine_ResNet_BEST.pth'

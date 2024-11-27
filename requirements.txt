@@ -5,3 +5,4 @@ h5py
 numpy
 uproot
 matplotlib
+torch_geometric

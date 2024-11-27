@@ -24,7 +24,7 @@ from watchmal.utils.logging_utils import get_git_version
 log = logging.getLogger(__name__)
 
 
-@hydra.main(config_path='config/', config_name='resnet_train', version_base="1.1")
+@hydra.main(config_path='config/', config_name='reg_train_all', version_base="1.1")
 def main(config):
     """
     Run model using given config, spawn worker subprocesses as necessary

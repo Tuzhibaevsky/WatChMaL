@@ -1,0 +1,5 @@
+# @package _group_
+split_path:
+  /scratch/yikai/split/gen_id.npz
+dataset:
+  h5file: /scratch/yikai/combined/gen_id.qt_digi.h5

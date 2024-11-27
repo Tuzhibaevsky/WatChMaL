@@ -1,0 +1,5 @@
+# @package _group_
+split_path:
+  /home/yikai/scratch/split/gen_all.npz
+dataset:
+  h5file: /home/yikai/scratch/combined/gen_all.h5

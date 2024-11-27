@@ -1,16 +1,16 @@
 gpu_list:
-  - 5
-seed: null
+  - 0
+seed: 37
 dump_path: './outputs/'
 model:
-  num_output_channels: 3
+  num_output_channels: 2
 defaults:
-  - data: iwcd_electron
-  - data/dataset: iwcd_cnn
-  - model: resnet18
+  - data: SK5_rock
+  - data/dataset: SK_cnn
+  - model: resnet50
   - engine: regression
   - tasks/restore_state: restore_state
   - tasks/evaluate: test
-  - loss@tasks.evaluate.loss: huber
+  - loss@tasks.evaluate.loss: angular
   - sampler@tasks.evaluate.data_loaders.test.sampler: subset_sequential
   - _self_

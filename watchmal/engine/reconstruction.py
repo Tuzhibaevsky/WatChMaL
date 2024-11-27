@@ -198,8 +198,6 @@ class ReconstructionEngine(ABC):
         self.step = 0
         # keep track of the validation loss
         self.best_validation_loss = np.inf
-        # initialize the iterator over the validation set
-        val_iter = iter(self.data_loaders["validation"])
         # global training loop for multiple epochs
         start_time = datetime.now()
         step_time = start_time
@@ -219,6 +217,9 @@ class ReconstructionEngine(ABC):
             # local training loop for batches in a single epoch
             steps_per_epoch = len(train_loader)
             for self.step, train_data in enumerate(train_loader):
+                # if self.iteration % val_interval == 0:
+                #     print(f"  Train dataset angles:\n{train_data['angles'][:10]}")
+                #     print(f"  data:\n{train_data['data'][:3,:,70:77,70:80]}")
                 # Prepare the data for forward pass
                 self.process_data(train_data)
                 # Call forward: make a prediction & measure the average error
@@ -248,6 +249,8 @@ class ReconstructionEngine(ABC):
                               f" Epoch time {step_time-epoch_start_time}"
                               f" Total time {step_time-start_time}")
                         print(f"  Training   {', '.join(f'{k}: {v:.5g}' for k, v in metrics.items())}")
+                    # initialize the iterator over the validation set
+                    val_iter = iter(self.data_loaders["validation"])
                     self.validate(val_iter, num_val_batches, checkpointing)
             # save state at end of epoch
             if self.rank == 0 and (save_interval is not None) and ((self.epoch+1) % save_interval == 0):
@@ -284,6 +287,8 @@ class ReconstructionEngine(ABC):
                     self.data_loaders["validation"].sampler.set_epoch(self.data_loaders["validation"].sampler.epoch+1)
                 val_iter = iter(self.data_loaders["validation"])
                 val_data = next(val_iter)
+                # print(f"  Validation dataset angles:\n{val_data['angles'][:3]}")
+                # print(f"  data:\n{val_data['data'][:3,:,70:77,70:80]}")
             # extract the event data and target from the input data dict
             self.process_data(val_data)
             # evaluate the network
