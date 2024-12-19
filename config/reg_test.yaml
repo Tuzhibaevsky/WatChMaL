@@ -3,7 +3,7 @@ gpu_list:
 seed: 37
 dump_path: './outputs/'
 model:
-  num_output_channels: 2
+  num_output_channels: 3
 defaults:
   - data: SK5_rock
   - data/dataset: SK_cnn
@@ -11,6 +11,6 @@ defaults:
   - engine: regression
   - tasks/restore_state: restore_state
   - tasks/evaluate: test
-  - loss@tasks.evaluate.loss: angular
+  - loss@tasks.evaluate.loss: huber
   - sampler@tasks.evaluate.data_loaders.test.sampler: subset_sequential
   - _self_
